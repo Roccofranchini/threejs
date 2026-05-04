@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Italsider Bagnoli — Fabbrica Abbandonata</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app"></div>
+
+  <div id="hud">
+    <div id="title">
+      <h1>ITALSIDER · BAGNOLI</h1>
+      <p>Acciaieria abbandonata · 1910 — 1990</p>
+    </div>
+    <div id="compass">
+      <div id="needle"></div>
+      <span class="dir n">N</span>
+      <span class="dir e">E</span>
+      <span class="dir s">S</span>
+      <span class="dir w">O</span>
+    </div>
+  </div>
+
+  <div id="instructions">
+    <div class="panel">
+      <h2>Italsider · Area di Bagnoli</h2>
+      <p class="sub">Ricostruzione interattiva della fabbrica abbandonata</p>
+      <div class="controls">
+        <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> muovi</div>
+        <div><kbd>Mouse</kbd> guarda</div>
+        <div><kbd>Shift</kbd> corri · <kbd>Spazio</kbd> sali · <kbd>Ctrl</kbd> scendi</div>
+        <div><kbd>F</kbd> volo libero · <kbd>Esc</kbd> esci</div>
+      </div>
+      <button id="startBtn">Entra nella fabbrica</button>
+      <p class="credit">Tutto modellato in Three.js · primitive geometriche</p>
+    </div>
+  </div>
+
+  <div id="loadingBar"><div id="loadingFill"></div></div>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
