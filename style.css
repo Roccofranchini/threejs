@@ -4,8 +4,6 @@
   --bg: #f6f5f2;
   --ink: #111;
   --ink-soft: #6a6a66;
-  --line: rgba(0, 0, 0, 0.08);
-  --accent: #111;
 }
 
 html, body {
@@ -16,7 +14,6 @@ html, body {
   color: var(--ink);
   font-family: "Inter", "Helvetica Neue", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
-  letter-spacing: -0.005em;
 }
 
 #app {
@@ -25,215 +22,55 @@ html, body {
 }
 canvas { display: block; }
 
-/* ─── Top HUD ─────────────────────────────────────────────── */
-.hud-top {
-  position: fixed;
-  top: 22px;
-  left: 24px;
-  right: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 5;
-  pointer-events: none;
-  font-size: 13px;
-  color: var(--ink);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
-.brand-mark {
-  display: inline-block;
-  font-size: 14px;
-  transform: translateY(-1px);
-}
-
-.meta {
-  font-size: 11px;
-  color: var(--ink-soft);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-variant-numeric: tabular-nums;
-}
-
-#count {
-  color: var(--ink);
-  font-weight: 600;
-}
-
-/* ─── Bottom HUD ──────────────────────────────────────────── */
-.hud-bottom {
-  position: fixed;
-  bottom: 22px;
-  left: 24px;
-  right: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 5;
-}
-
-.hint {
-  display: flex;
-  gap: 18px;
-  font-size: 11px;
-  color: var(--ink-soft);
-  letter-spacing: 0.04em;
-  align-items: center;
-  pointer-events: none;
-}
-
-.hint span { display: inline-flex; align-items: center; gap: 5px; }
-
-kbd {
-  display: inline-block;
-  padding: 2px 7px;
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--line);
-  font-family: "SF Mono", "Menlo", monospace;
-  font-size: 10px;
-  color: var(--ink);
-  border-radius: 3px;
-  font-weight: 500;
-}
-
-.upload-btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 9px 16px;
-  background: var(--ink);
-  color: #fff;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: transform 0.18s ease, background 0.18s ease;
-  user-select: none;
-}
-
-.upload-btn:hover {
-  transform: translateY(-1px);
-  background: #2a2a28;
-}
-
-.upload-btn:active { transform: translateY(0); }
-
-/* ─── Drop zone overlay ───────────────────────────────────── */
-#dropzone-overlay {
+#empty-state {
   position: fixed;
   inset: 0;
-  background: rgba(246, 245, 242, 0.82);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  z-index: 10;
+  z-index: 4;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 200ms ease;
-}
-
-#dropzone-overlay.active {
-  opacity: 1;
-}
-
-.drop-card {
+  gap: 8px;
   text-align: center;
-  padding: 48px 56px;
-  border: 2px dashed var(--ink);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  transition: opacity 400ms ease;
 }
+#empty-state.hidden { opacity: 0; }
 
-.drop-icon {
-  font-size: 36px;
-  margin-bottom: 16px;
-  font-weight: 300;
-}
-
-.drop-card p {
-  font-size: 14px;
-  letter-spacing: 0.02em;
+#empty-state .title {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--ink);
 }
-
-/* ─── Focus card ──────────────────────────────────────────── */
-#focus-card {
-  position: fixed;
-  top: 22px;
-  right: 24px;
-  z-index: 6;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 8px 8px 16px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--line);
-  border-radius: 999px;
+#empty-state .hint {
   font-size: 12px;
-  transition: opacity 180ms ease, transform 180ms ease;
-}
-
-#focus-card.hidden {
-  opacity: 0;
-  transform: translateY(-6px);
-  pointer-events: none;
-}
-
-.focus-hint {
   color: var(--ink-soft);
-  font-size: 11px;
   letter-spacing: 0.02em;
 }
-
-#focus-close {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--ink);
-  color: #fff;
-  border: none;
-  font-size: 16px;
-  line-height: 1;
-  cursor: pointer;
-  transition: background 0.15s ease;
+#empty-state code {
+  font-family: "SF Mono", "Menlo", monospace;
+  font-size: 11px;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 3px;
 }
 
-#focus-close:hover { background: #2a2a28; }
-
-/* ─── Loading ─────────────────────────────────────────────── */
 #loading {
   position: fixed;
   inset: 0;
   background: var(--bg);
   z-index: 20;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
   transition: opacity 600ms ease, visibility 600ms ease;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
 }
-
 #loading.hidden { opacity: 0; visibility: hidden; }
 
 .ring {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   border: 2px solid rgba(0, 0, 0, 0.08);
   border-top-color: var(--ink);
   border-radius: 50%;
@@ -242,18 +79,4 @@ kbd {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
-}
-
-/* ─── Mobile tweaks ───────────────────────────────────────── */
-@media (max-width: 720px) {
-  .hud-top, .hud-bottom { left: 14px; right: 14px; }
-  .hud-top { top: 14px; }
-  .hud-bottom {
-    bottom: 14px;
-    flex-direction: column;
-    gap: 12px;
-    align-items: stretch;
-  }
-  .hint { flex-wrap: wrap; gap: 10px 14px; justify-content: center; }
-  .upload-btn { justify-content: center; padding: 11px 16px; }
 }

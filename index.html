@@ -3,50 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Universe — galleria 3D</title>
+  <title>Image Universe</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="app"></div>
 
-  <header class="hud-top">
-    <div class="brand">
-      <span class="brand-mark">◇</span>
-      <span class="brand-text">image&nbsp;universe</span>
-    </div>
-    <div class="meta">
-      <span id="count">0</span>&nbsp;immagini
-    </div>
-  </header>
-
-  <footer class="hud-bottom">
-    <div class="hint">
-      <span><kbd>Drag</kbd> ruota</span>
-      <span><kbd>Scroll</kbd> zoom</span>
-      <span><kbd>Right&nbsp;drag</kbd> sposta</span>
-      <span><kbd>Click</kbd> immagine per focus</span>
-    </div>
-    <label class="upload-btn">
-      <span>＋ Aggiungi le tue immagini</span>
-      <input type="file" id="file-input" multiple accept="image/*" hidden />
-    </label>
-  </footer>
-
-  <div id="dropzone-overlay">
-    <div class="drop-card">
-      <div class="drop-icon">↧</div>
-      <p>Rilascia per aggiungerle all'universo</p>
-    </div>
-  </div>
-
-  <div id="focus-card" class="hidden">
-    <button id="focus-close" aria-label="chiudi">×</button>
-    <p class="focus-hint">esc o click per uscire</p>
+  <div id="empty-state" class="hidden">
+    <p class="title">universo vuoto</p>
+    <p class="hint">aggiungi immagini in <code>images/</code> e ricostruisci</p>
   </div>
 
   <div id="loading">
     <div class="ring"></div>
-    <span>caricamento…</span>
   </div>
 
   <script type="importmap">
