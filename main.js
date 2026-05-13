@@ -103,7 +103,7 @@ function spawnParticle(position, texture) {
 }
 
 // ─── Carica il manifest e popola la scena ───────────────────────────────────
-const NUM_PARTICLES = 100;
+const MAX_PARTICLES = 100;
 
 async function loadManifest() {
   try {
@@ -137,18 +137,11 @@ async function bootstrap() {
     return;
   }
 
-  // Genera 100 particelle (o quante immagini ci sono se meno di 100).
-  // Ogni particella riceve una texture pescata casualmente dal pool.
-  const target = Math.max(NUM_PARTICLES, textures.length);
-  for (let i = 0; i < target; i++) {
-    const tex = textures[i % textures.length];
-    if (i >= textures.length) {
-      // se ci sono più particelle che texture, scegliamo a caso per varietà
-      const rand = textures[Math.floor(Math.random() * textures.length)];
-      spawnParticle(randomPositionInBall(universeRadius), rand);
-    } else {
-      spawnParticle(randomPositionInBall(universeRadius), tex);
-    }
+  // Una particella per ogni immagine, con un tetto a MAX_PARTICLES.
+  // Se ci sono più immagini del cap, si usano le prime in ordine alfabetico.
+  const count = Math.min(textures.length, MAX_PARTICLES);
+  for (let i = 0; i < count; i++) {
+    spawnParticle(randomPositionInBall(universeRadius), textures[i]);
   }
 
   loading.classList.add('hidden');

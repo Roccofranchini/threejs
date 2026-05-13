@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "node build.js",
     "dev": "node build.js && python3 -m http.server 8000"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
   }
 }
